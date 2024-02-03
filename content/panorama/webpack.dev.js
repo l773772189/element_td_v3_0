@@ -101,6 +101,7 @@ module.exports = {
 
                 // if filename is not set, it will use the name of the entry
                 { import: './hud/layout.xml', type: 'Hud' },
+                { import: './myBuildFrameWork/layout.xml', type: 'Hud' },
             ],
         }),
         // use ignore plugin to ignore less files changes

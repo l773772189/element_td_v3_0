@@ -1,6 +1,7 @@
 import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
 import { XNetTable } from './xnet-table';
+import { Build } from "./Build";
 
 declare global {
     interface CDOTAGameRules {
@@ -21,5 +22,12 @@ export function ActivateModules() {
         new GameConfig();
         // 初始化测试模块xD
         new Debug();
+        new Build();
+        Timers.CreateTimer(3, () => {
+            const player = PlayerResource.GetPlayer(0);
+            const hero = player.GetAssignedHero();
+            const abilityBuff = hero.AddAbility('mb');
+            abilityBuff.SetLevel(1);
+        });
     }
 }
