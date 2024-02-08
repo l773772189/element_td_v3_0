@@ -6,15 +6,16 @@
 "XLSXContent"
 {
 
-	"npc_kv_generator_test" {
+	"npc_kv_generator_test_tower" {
 		"Cost" "1"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/heroes/earthshaker/earthshaker.vmdl"
 		"ModelScale" "0.8500"
 		"Creature" {
 			"AttachWearables" {
-				"1" { "ItemDef" "123" }
-				"2" { "ItemDef" "223" }
+				"1" { "ItemDef" "459" }
+				"2" { "ItemDef" "460" }
+				"3" { "ItemDef" "461" }
 			}
 		}
 		"SoundSet" "Hero_Earthshaker"

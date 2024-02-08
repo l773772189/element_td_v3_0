@@ -1,7 +1,7 @@
 import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
 import { XNetTable } from './xnet-table';
-import { Build } from "./Build";
+import { Build } from './Build';
 
 declare global {
     interface CDOTAGameRules {
@@ -28,6 +28,11 @@ export function ActivateModules() {
             const hero = player.GetAssignedHero();
             const abilityBuff = hero.AddAbility('mb');
             abilityBuff.SetLevel(1);
+        });
+        // @ts-ignore-
+        Timers.CreateTimer(4, () => {
+            // @ts-ignore
+            CustomNetTables.SetTableValue('lz', 'v', { value: '123' });
         });
     }
 }

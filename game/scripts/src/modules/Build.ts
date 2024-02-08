@@ -9,19 +9,38 @@ export class Build {
     constructor() {
         print('监听器执行后端');
         CustomGameEventManager.RegisterListener('buildAtPosition', (eventSourceIndex: number, args: any) => {
-            DeepPrintTable(args);
+            // DeepPrintTable(args);
             const position = args.position;
-            print(position['0']);
-            print(position['1']);
-            print(position['2']);
-            // 假设 'npc_dota_hero_axe' 是你想要创建的单位名称
-            // 'null' 是单位的所有者，对于中立单位可以为 null
-            // position 是一个包含 x, y, z 坐标的数组，例如 [0, 0, 0]
-            // -1 表示使用默认的队伍
-            const unitName = 'npc_dota_hero_axe';
-            const team = -1;
+            const radius = args.radius;
+            const location = Vector(position['0'], position['1'], position['2']);
+            const unitName = 'npc_kv_generator_test_tower';
+            const team = 2;
             const owner = null;
-            const unit = CreateUnitByName(unitName, Vector(position['0'] - 25, position['1'] - 25, position['2']), true, owner, owner, team);
+
+            const teamFilter = 3;
+            const typeFilter = 55;
+            const flagFilter = 0;
+            const order = 0;
+            const canGrowCache = false;
+            const units = FindUnitsInRadius(team, location, null, radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
+            print('查找到的单位123' + units.length);
+            let towerNum = 0;
+            for (const unit1 of units) {
+                if (unit1.GetUnitName().includes('tower')) {
+                    towerNum++;
+                }
+            }
+            if (towerNum >= 1) {
+                print('已经有单位，无法建造');
+                const nPlayerID = args.PlayerID as PlayerID;
+                print(nPlayerID);
+                const player = PlayerResource.GetPlayer(nPlayerID);
+                print('playerObj' + player);
+                send_error_message_client(player, '已经有单位，禁止建造');
+                aa('a', 'b', 'c');
+                return;
+            }
+            const unit = CreateUnitByName(unitName, location, true, owner, owner, team);
         });
     }
 }

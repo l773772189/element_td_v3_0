@@ -14,7 +14,8 @@
         "experimentalDecorators": true,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
-        "strict": false
+        "strict": false,
+        "esModuleInterop": true
     },
     "include": ["src"],
     "tstl": {
